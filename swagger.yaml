@@ -65,3 +65,55 @@ paths:
           description: bad request.
         "500":
           description: internal server error.
+
+  /courseObject:
+    get:
+      tags:
+        - object
+      summary: return a course object.
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
+
+        "400":
+          description: bad request.
+        "500":
+          description: internal server error.
+
+  /courses:
+    get:
+      tags:
+        - array
+      summary: return a all course
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+
+        "400":
+          description: bad request.
+        "500":
+          description: internal server error.
