@@ -4,6 +4,7 @@ import fs from "node:fs";
 import YAML from "yaml";
 
 const app = express();
+app.use(express.json());
 
 const file = fs.readFileSync("./swagger.yaml", "utf8");
 const swaggerDocument = YAML.parse(file);
@@ -38,6 +39,17 @@ app.get("/api/v1/courseObject", (req, res) => {
 app.get("/api/v1/courses", (req, res) => {
   res.send(courses);
 });
+
+app.get("/api/v1/course/:courseId", (req, res) => {
+  const course = courses.find((course) => course.id === req.params.courseId);
+  res.send(course);
+});
+
+app.post("/api/v1/addCourse", (req, res) => {
+  courses.push(req.body);
+  res.send(true);
+});
+
 
 app.listen(8080, () => {
   console.log(`server is running on port 8080`);
