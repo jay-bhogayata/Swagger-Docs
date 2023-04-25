@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: swagger docs project
+  description: a project for learning how to write swagger docs.
+  version: 1.0.0
+  contact:
+    email: jaybhogayata53@gmail.com
+    url: "https://www.codewithjay.co.in"
+
+servers:
+  - url: "{protocol}://localhost:8080/api/{version}"
+    description: for localhost
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+
+  - url: "{protocol}://swagger.codewithjay.co.in/api/{version}"
+    description: for production
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /:
+    get:
+      tags:
+        - string
+      summary: route for test the backend is up or not.
+      responses:
+        "200":
+          description: A hello from backend.
+          # what type of content in response
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Hello"
+        "400":
+          description: bad request.
+        "500":
+          description: internal server error.

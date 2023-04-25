@@ -1,0 +1,18 @@
+{
+  "name": "swagger-docs-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "jay bhogayata",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "swagger-ui-express": "^4.6.2",
+    "yaml": "^2.2.2"
+  }
+}
