@@ -182,3 +182,63 @@ paths:
           description: bad request.
         "500":
           description: internal server error.
+
+  /coursequery:
+    get:
+      tags:
+        - url query
+      summary: how query work with swagger docs.
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [nyc, del, blr]
+        - name: device
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [web, mobile]
+      responses:
+        "200":
+          description: Ok
+          contact:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  device:
+                    type: string
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+  /courseupload:
+    post:
+      tags:
+        - upload img
+      summary: uploading course image
+      parameters:
+        - in: header
+          name: auth
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: All good success
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error

@@ -1,10 +1,15 @@
+import { URL } from "url";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import fs from "node:fs";
 import YAML from "yaml";
+import fileUpload from "express-fileupload";
+
+const __dirname = new URL(".", import.meta.url).pathname;
 
 const app = express();
 app.use(express.json());
+app.use(fileUpload());
 
 const file = fs.readFileSync("./swagger.yaml", "utf8");
 const swaggerDocument = YAML.parse(file);
@@ -50,6 +55,21 @@ app.post("/api/v1/addCourse", (req, res) => {
   res.send(true);
 });
 
+app.get("/api/v1/coursequery", (req, res) => {
+  let location = req.query.location;
+  let device = req.query.device;
+
+  res.send({ location, device });
+});
+
+app.post("/api/v1/courseupload", (req, res) => {
+  const file = req.files.file;
+  let path = __dirname + "/images/" + Date.now() + ".png";
+  console.log(path);
+  file.mv(path, (err) => {
+    res.send(true);
+  });
+});
 
 app.listen(8080, () => {
   console.log(`server is running on port 8080`);
