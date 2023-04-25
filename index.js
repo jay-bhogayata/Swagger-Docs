@@ -4,10 +4,12 @@ import swaggerUi from "swagger-ui-express";
 import fs from "node:fs";
 import YAML from "yaml";
 import fileUpload from "express-fileupload";
+import cors from "cors";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 
